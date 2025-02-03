@@ -47,11 +47,6 @@ function MainView() {
         
     };
 
-    if (!isLoggedIn) {
-        // Redirect to login page if the user is not logged in
-        return <Navigate to="/login" replace />;
-    }
-
     return (
         <> 
             <div>

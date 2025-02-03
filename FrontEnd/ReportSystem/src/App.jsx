@@ -12,7 +12,13 @@ function App() {
   /**  
    * Returns a Router component to navigate through the app
   */
+ 
+  if (!isLoggedIn) {
+    // Redirect to login page if the user is not logged in
+    return <Navigate to="/login" replace />;
+  }
   return (
+    
     <>
     <Router>
       <Routes>

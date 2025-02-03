@@ -1,0 +1,11 @@
+.DS_Store       # macOS Finder files
+Thumbs.db       # Windows thumbnail files
+node_modules    # Node.js dependencies (if you have a Node.js project)
+.env            # Environment variables files (important: NEVER commit these!)
+*.log           # Log files
+*.tmp           # Temporary files
+.vscode         # VS Code settings (if you don't want to share these)
+.idea           # IntelliJ IDEA settings (if applicable)
+__pycache__/    # Python cache files
+*.swp           # Swap files (often created by text editors)
+.history        # History files
