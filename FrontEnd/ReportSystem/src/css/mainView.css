@@ -1,0 +1,15 @@
+.report {
+    border: 2px solid rgba(58, 58, 254, 0.854);
+    border-radius: 25px;
+    margin: 10px;
+    max-width: 40vw;
+    min-width: 30vw;
+}
+
+.report:hover {
+    cursor: pointer;
+}
+
+.report:active {
+    opacity: 30%;
+}
