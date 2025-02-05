@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.forms import model_to_dict
 
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from .models import Report
@@ -51,7 +52,7 @@ def handle_coordinates(request):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid HTTP method'}, status=405)
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class Report_View(View):
     def get(self, request):
         reports = Report.objects.all()
@@ -60,7 +61,7 @@ class Report_View(View):
         return JsonResponse({'status': 'success', 'status_code': 200,
                             'reports': reports_list
                         })
-
+@method_decorator(csrf_exempt, name='dispatch')
 class Report_Details_View(View):
     def get(self, request, id, *args, **kwargs):
         report = get_object_or_404(Report, id=id)
@@ -69,9 +70,9 @@ class Report_Details_View(View):
                             'report': report_dict
                         })  
     
-
+@method_decorator(csrf_exempt, name='dispatch')
 class Authentication(View):
-    def get(self, request):
+    def post(self, request):
          return JsonResponse({"message": "Login successful", "status": "success"}, status=200)
     
     

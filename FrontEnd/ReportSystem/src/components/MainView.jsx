@@ -14,7 +14,6 @@ function MainView() {
     // Hooks
     const [reports, setReports] = useState([]);
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     
     const handleData = async (event) => {

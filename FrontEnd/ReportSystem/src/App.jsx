@@ -8,28 +8,37 @@ import MainView from './components/MainView.jsx';
 import MapComponent from './components/MapComponent.jsx';
 import ReportForm from './components/ReportForm.jsx';
 import LoginForm from './components/LoginForm.jsx';
+import { Link, useNavigate, Navigate } from "react-router-dom";
+
+// Authentication
+import ProtectedView from './ProtectedView.jsx';
+import { useAuth, AuthProvider  } from "./AuthContext";
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   /**  
    * Returns a Router component to navigate through the app
   */
  
-  if (!isLoggedIn) {
-    // Redirect to login page if the user is not logged in
-    return <Navigate to="/login" replace />;
-  }
+
   return (
     
     <>
-    <Router>
-      <Routes>
-        <Route path="/map" element={<MapComponent />} />
-        <Route path="/report" element={<ReportForm />} />
-        <Route path="/" element={<MainView />} />
-        <Route path="/report_details" element={<ReportDetails />} />
-        <Route path="/login" element={<LoginForm />} />
-
-      </Routes>
-    </Router>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/map" element={<MapComponent />} />
+            <Route path="/report" element={<ReportForm />} />
+            <Route path="/" element={ 
+              <ProtectedView>
+                  <MainView />
+               </ProtectedView>} />
+            <Route path="/report_details" element={<ReportDetails />} />
+            <Route path="/login" element={<LoginForm />} />
+          </Routes>
+        </Router> 
+      </AuthProvider>
     </>
   )
 }

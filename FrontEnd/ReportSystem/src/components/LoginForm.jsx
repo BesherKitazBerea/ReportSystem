@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/loginForm.css'
  
+import { useAuth } from '..//AuthContext';
 
 
 function LoginForm() {
     const [nameData, setNameData] = useState("");
     const [passwordData, setPasswordData] = useState("");
     const [somethingWrong, setSomethingWrong] = useState(false);
+
+    // Contexts
+    const navigate = useNavigate();
+    const { user, login, logout } = useAuth(); // Access context values
+
     function handleUsernameChange(e) {
         setNameData(e.target.value)
     }
@@ -30,11 +36,13 @@ function LoginForm() {
                     password: passwordData,
                 }),
             });
-        
+            
             if (response.ok) {
                 // localStorage.setItem('token', response.headers.get('Authorization'));
-                
-                Navigate('/');
+                console.log("It worked!");
+                const userData = await response.json(); 
+                login(response)
+                navigate('/');
             } else {
                 setSomethingWrong(true);
             }
@@ -71,6 +79,8 @@ function LoginForm() {
             </form>
         
         <Link to={'/password-reset'}> Forgot Password? </Link>
+        <Link to={'/password-reset'}> Don't have an account? Create an account for free </Link>
+
         </div>
 
     );
